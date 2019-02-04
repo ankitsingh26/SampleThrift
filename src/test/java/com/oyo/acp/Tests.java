@@ -36,38 +36,29 @@ public class Tests {
 
     //@Before
     public void insert(){
-        Movie m1 = new Movie("M1","T1");
-        Movie m2 = new Movie("M2","T2");
-        Movie m3 = new Movie("M3","T1");
-        Movie m4 = new Movie("M4","T1");
-        Movie m5 = new Movie("M5","T2");
+        insertMovies();
+        insertTheatres();
+    }
 
-//        m1.getId();
-//        m2.getId();
-//        m3.getId();
-//        m4.getId();
-//        m5.getId();
+    private void insertTheatres() {
+//        ...
+    }
 
-        this.movieRepo.save(m1);
-        this.movieRepo.save(m2);
-        this.movieRepo.save(m3);
-        this.movieRepo.save(m4);
-        this.movieRepo.save(m5);
+    private void insertMovies() {
+        saveInMongo("movie1", "theatre1");
+    }
 
-        Theatre t1 = new Theatre("T1","GKP");
-        Theatre t2 = new Theatre("T2","HYD");
-
-        t1.getId();
-        t2.getId();
-
-        this.theatreRepo.save(t1);
-        this.theatreRepo.save(t2);
+    private void saveInMongo(String movieName, String theatreName) {
+        Movie movie = new Movie(movieName, theatreName);
+        movieRepo.save(movie);
     }
 
     @Test
     public void testMovie() throws Exception{
         insert();
-        THttpClient httpClient = new THttpClient("http://localhost:8080/movie");
+        String port = "8080";
+        String uri = "/movie";
+        THttpClient httpClient = new THttpClient("http://localhost:"+port+uri);
         TProtocol protocol = new TBinaryProtocol(httpClient);
         movieClient = new TMovieService.Client(protocol);
 

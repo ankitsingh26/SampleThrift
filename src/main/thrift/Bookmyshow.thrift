@@ -15,13 +15,13 @@ struct TTheatre{
 }
 
 service TMovieService{
-    bool ping(),
-    list<TMovie> getAllMoviesByTheatre(1:string theatreName),
-    list<TMovie> getAllMovies(1:string city),
+    bool ping();
+    list<TMovie> getAllMoviesByTheatre(1:string theatreName);
+    list<TMovie> getAllMovies(1:string city);
 
 }
 
 service TTheatreService{
-    bool ping(),
-    list<TTheatre> getAllTheatres(1:string city),
+    bool ping();
+    list<TTheatre> getAllTheatres(1:string city);
 }
